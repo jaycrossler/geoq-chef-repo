@@ -21,7 +21,7 @@ git node['geoq']['location'] do
   action :sync
   notifies :run, "execute[install_geoq_dependencies]", :immediately
   notifies :run, "bash[sync_db]"
-  notifies :run, "execute[install_map_fixtures]"
+  notifies :run, "execute[install_dev_fixtures]"
 end
 
 execute "install_geoq_dependencies" do
@@ -31,8 +31,8 @@ execute "install_geoq_dependencies" do
   user 'root'
 end
 
-execute "install_map_fixtures" do
-  command "sudo #{node['geoq']['virtualenv']['location']}/bin/activate && sudo paver delayed_fixtures"
+execute "install_dev_fixtures" do
+  command "sudo #{node['geoq']['virtualenv']['location']}/bin/activate && sudo paver install_dev_fixtures"
   cwd node['geoq']['location']
   action :nothing
   user 'root'
@@ -101,13 +101,6 @@ end
 execute "collect_static" do
   command "#{node['geoq']['virtualenv']['location']}/bin/python manage.py collectstatic --noinput"
   cwd "#{node['geoq']['location']}"
-  action :nothing
-end
-
-bash "install_fixtures" do
-  code "source #{node['geoq']['virtualenv']['location']}/bin/activate && paver delayed_fixtures"
-  cwd "#{node['geoq']['location']}"
-  user 'postgres'
   action :nothing
 end
 

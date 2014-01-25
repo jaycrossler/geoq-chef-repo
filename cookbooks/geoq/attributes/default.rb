@@ -2,7 +2,7 @@ default['geoq']['debug'] = true
 default['geoq']['logging']['location'] = '/var/log/geoq'
 default['geoq']['virtualenv']['location'] = '/var/lib/geoq'
 default['geoq']['location'] = '/usr/src/geoq'
-default['geoq']['git_repo']['location'] = 'https://github.com/jaycrossler/geo-events.git'
+default['geoq']['git_repo']['location'] = 'https://github.com/jaycrossler/geoq-django.git'
 default['geoq']['git_repo']['branch'] = 'master'
 default['postgresql']['password']['postgres'] = 'geoq'
 
