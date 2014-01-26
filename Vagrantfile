@@ -66,6 +66,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.provision :shell, :path => "scripts/install_rvm.sh"
       config.vm.provision :shell, :path => "scripts/install_ruby.sh"
       config.vm.provision :shell, :path => "scripts/install_PIL.sh"
+      config.vm.provision :shell, :path => "scripts/install_lessc.sh"
       config.vm.provision :shell, :inline => "gem install chef --version 11.6.0 --no-rdoc --no-ri --conservative"
 
       config.vm.provision :chef_solo do |chef|
