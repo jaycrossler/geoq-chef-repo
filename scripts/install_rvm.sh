@@ -2,4 +2,4 @@
 
  sudo apt-get install -y curl
 
- curl -L https://get.rvm.io | bash -s $1
+ curl -sSL https://get.rvm.io | bash -s stable --ruby

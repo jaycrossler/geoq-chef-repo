@@ -32,7 +32,7 @@ execute "install_geoq_dependencies" do
 end
 
 execute "install_dev_fixtures" do
-  command "sudo #{node['geoq']['virtualenv']['location']}/bin/activate && sudo paver install_dev_fixtures"
+  command "sudo #{node['geoq']['virtualenv']['location']}/bin/activate && sudo paver delayed_fixtures"
   cwd node['geoq']['location']
   action :nothing
   user 'root'
@@ -101,6 +101,13 @@ end
 execute "collect_static" do
   command "#{node['geoq']['virtualenv']['location']}/bin/python manage.py collectstatic --noinput"
   cwd "#{node['geoq']['location']}"
+  action :nothing
+end
+
+bash "install_fixtures" do
+  code "source #{node['geoq']['virtualenv']['location']}/bin/activate && paver delayed_fixtures"
+  cwd "#{node['geoq']['location']}"
+  user 'postgres'
   action :nothing
 end
 
